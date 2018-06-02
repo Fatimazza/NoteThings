@@ -6,11 +6,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import butterknife.BindView;
 import id.co.fatimazza.notethings.R;
 
 public class AddThingsActivity extends AppCompatActivity implements AddThingsContract.View {
+
+    @BindView(R.id.et_nameof_thing)
+    public EditText etNameOfThing;
+
+    @BindView(R.id.sp_supplier)
+    public Spinner spSupplier;
+
+    @BindView(R.id.et_quantity)
+    public EditText etQuantity;
+
+    @BindView(R.id.et_date)
+    public EditText etDate;
 
     private AddThingsPresenter addThingsPresenter;
 

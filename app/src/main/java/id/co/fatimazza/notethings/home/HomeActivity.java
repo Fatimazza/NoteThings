@@ -8,26 +8,25 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import butterknife.BindView;
 import id.co.fatimazza.notethings.R;
 import id.co.fatimazza.notethings.addthings.AddThingsActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private RecyclerView rvListOfThings;
-    private TextView tvEmpty;
-    private FloatingActionButton fabAdd;
+    @BindView(R.id.rv_listof_things)
+    public RecyclerView rvListOfThings;
+
+    @BindView(R.id.tv_empty_data)
+    public TextView tvEmpty;
+
+    @BindView(R.id.fab_add)
+    public FloatingActionButton fabAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        initView();
-    }
-
-    private void initView() {
-        rvListOfThings = findViewById(R.id.rv_listof_things);
-        tvEmpty = findViewById(R.id.tv_empty_data);
-        fabAdd = findViewById(R.id.fab_add);
     }
 
     public void addNewThingToList (View view) {
