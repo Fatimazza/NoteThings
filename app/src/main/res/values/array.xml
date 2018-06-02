@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="suppliers_array">
+        <item>Pabrik Roti</item>
+        <item>Pabrik Snack</item>
+        <item>Pabrik Minuman</item>
+        <item>Pabrik Kosmetik</item>
+        <item>Pabrik Obat</item>
+    </string-array>
+</resources>
