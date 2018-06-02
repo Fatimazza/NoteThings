@@ -8,7 +8,7 @@ import android.view.MenuItem;
 
 import id.co.fatimazza.notethings.R;
 
-public class AddThingsActivity extends AppCompatActivity {
+public class AddThingsActivity extends AppCompatActivity implements AddThingsContract.View {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
