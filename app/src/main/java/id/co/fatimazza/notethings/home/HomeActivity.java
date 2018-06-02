@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import id.co.fatimazza.notethings.R;
 import id.co.fatimazza.notethings.addthings.AddThingsActivity;
 
@@ -27,6 +28,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        ButterKnife.bind(this);
     }
 
     public void addNewThingToList (View view) {

@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import id.co.fatimazza.notethings.R;
 
 public class AddThingsActivity extends AppCompatActivity implements AddThingsContract.View {
@@ -33,6 +34,7 @@ public class AddThingsActivity extends AppCompatActivity implements AddThingsCon
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_things);
+        ButterKnife.bind(this);
 
         ActionBar actionBar = this.getSupportActionBar();
         if (actionBar != null) {
