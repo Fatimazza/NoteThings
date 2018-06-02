@@ -1,6 +1,5 @@
 package id.co.fatimazza.notethings.addthings;
 
-import android.content.Context;
 
 import id.co.fatimazza.notethings.base.BasePresenter;
 
@@ -16,7 +15,7 @@ public class AddThingsPresenter extends BasePresenter<AddThingsContract.View>
     }
 
     @Override
-    public void addNewThing() {
-        getView().showLog();
+    public void addNewThing(String name, String supplier, long quantity, String date) {
+        getView().showSuccessAddThing();
     }
 }

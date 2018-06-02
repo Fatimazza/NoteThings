@@ -10,12 +10,13 @@ public interface AddThingsContract {
 
     interface View extends BaseContractView {
 
-        void showLog();
+        void showSuccessAddThing();
+
     }
 
     interface Presenter {
 
-        void addNewThing();
+        void addNewThing(String name, String supplier, long quantity, String date);
 
     }
 
