@@ -73,12 +73,7 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
         if (null != intent && intent.hasExtra(HomeActivity.EXTRA_IS_ADD_NEW)) {
             boolean isAdd = intent.getBooleanExtra(HomeActivity.EXTRA_IS_ADD_NEW, false);
             if (!isAdd) {
-                if (intent.hasExtra(HomeActivity.EXTRA_THING_ID)
-                    && intent.hasExtra(HomeActivity.EXTRA_THING_NAME)
-                    && intent.hasExtra(HomeActivity.EXTRA_THING_QUANTITY)
-                    && intent.hasExtra(HomeActivity.EXTRA_THING_SUPPLIER)
-                    && intent.hasExtra(HomeActivity.EXTRA_THING_DATE)){
-
+                if (intent.hasExtra(HomeActivity.EXTRA_THING_ID)){
                     idThing = intent.getLongExtra(HomeActivity.EXTRA_THING_ID, -1);
                     setUpManageThings();
                 }

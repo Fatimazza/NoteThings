@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +24,6 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
     public static final String EXTRA_IS_ADD_NEW = "is_add_new";
 
     public static final String EXTRA_THING_ID = "thing_id";
-    public static final String EXTRA_THING_NAME = "thing_name";
-    public static final String EXTRA_THING_SUPPLIER = "thing_supplier";
-    public static final String EXTRA_THING_QUANTITY = "thing_quantity";
-    public static final String EXTRA_THING_DATE = "thing_date";
 
     @BindView(R.id.rv_listof_things)
     public RecyclerView rvListOfThings;
@@ -110,16 +105,9 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
         isAddNew = false;
 
         Things things = homeAdapter.getListOfThings().get(position);
-        Toast.makeText(this,
-            "Selected data: " +things.getId() +" " +things.getName() +" " +things.getQuantity(), Toast.LENGTH_SHORT).show();
-
         Intent intent = new Intent(this, AddThingsActivity.class);
         intent.putExtra(EXTRA_IS_ADD_NEW, isAddNew);
         intent.putExtra(EXTRA_THING_ID, things.getId());
-        intent.putExtra(EXTRA_THING_NAME, things.getName());
-        intent.putExtra(EXTRA_THING_QUANTITY, things.getQuantity());
-        intent.putExtra(EXTRA_THING_SUPPLIER, things.getSupplier());
-        intent.putExtra(EXTRA_THING_DATE, things.getDate());
         startActivity(intent);
     }
 }
