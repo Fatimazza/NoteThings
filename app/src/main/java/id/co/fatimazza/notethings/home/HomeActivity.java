@@ -33,6 +33,8 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
 
     private HomeAdapter homeAdapter;
 
+    private HomePresenter homePresenter;
+
     private DaoSession daoSession;
 
     private List<Things> listOfThings;
@@ -43,6 +45,9 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
         initAdapter();
 
         initDaoSession();
+        initPresenter();
+        bindViewToPresenter();
+
         loadDataThings();
     }
 
@@ -62,6 +67,13 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
         daoSession = ((NoteThings) getApplication()).getDaoSession();
     }
 
+    private void initPresenter() {
+        homePresenter = new HomePresenter(daoSession);
+    }
+
+    private void bindViewToPresenter() {
+        homePresenter.setView(this);
+    }
 
     private void loadDataThings() {
         listOfThings = new ArrayList<>();
