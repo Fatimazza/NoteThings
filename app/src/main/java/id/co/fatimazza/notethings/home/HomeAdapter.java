@@ -55,16 +55,22 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
         View rootView;
 
+        @BindView(R.id.tv_thing_name)
         TextView tvThingName;
 
+        @BindView(R.id.tv_thing_quantity)
         TextView tvThingQuantity;
 
+        @BindView(R.id.tv_thing_supplier)
         TextView tvThingSupplier;
 
+        @BindView(R.id.tv_thing_date)
         TextView tvThingDate;
 
         public HomeViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
+
             this.rootView = itemView;
             tvThingName = rootView.findViewById(R.id.tv_thing_name);
             tvThingQuantity = rootView.findViewById(R.id.tv_thing_quantity);
