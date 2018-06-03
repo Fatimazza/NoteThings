@@ -1,8 +1,6 @@
 package id.co.fatimazza.notethings.addthings;
 
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -12,10 +10,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import id.co.fatimazza.notethings.R;
+import id.co.fatimazza.notethings.base.BaseActivity;
 
-public class AddThingsActivity extends AppCompatActivity implements AddThingsContract.View {
+public class AddThingsActivity extends BaseActivity implements AddThingsContract.View {
 
     @BindView(R.id.et_nameof_thing)
     public EditText etNameOfThing;
@@ -34,16 +32,14 @@ public class AddThingsActivity extends AppCompatActivity implements AddThingsCon
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_things);
-        ButterKnife.bind(this);
-
-        ActionBar actionBar = this.getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
 
         initPresenter();
         bindViewToPresenter();
+    }
+
+    @Override
+    public int getLayout() {
+        return R.layout.activity_add_things;
     }
 
     private void initPresenter() {
@@ -76,9 +72,12 @@ public class AddThingsActivity extends AppCompatActivity implements AddThingsCon
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            NavUtils.navigateUpFromSameTask(this);
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return super.onOptionsItemSelected(item);
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 }

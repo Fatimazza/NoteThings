@@ -2,18 +2,17 @@ package id.co.fatimazza.notethings.home;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import id.co.fatimazza.notethings.R;
 import id.co.fatimazza.notethings.addthings.AddThingsActivity;
+import id.co.fatimazza.notethings.base.BaseActivity;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseActivity {
 
     @BindView(R.id.rv_listof_things)
     public RecyclerView rvListOfThings;
@@ -27,8 +26,11 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        ButterKnife.bind(this);
+    }
+
+    @Override
+    public int getLayout() {
+        return R.layout.activity_home;
     }
 
     public void addNewThingToList (View view) {
