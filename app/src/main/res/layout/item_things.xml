@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <TextView
+        android:id="@+id/tv_thing_date"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textSize="16sp"
+        tools:text="22 Januari 2018"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_above="@id/tv_thing_supplier"/>
+
+    <LinearLayout
+        android:id="@+id/ll_thing_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@id/tv_thing_date"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_thing_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            tools:text="Roti Empuk"/>
+
+        <TextView
+            android:id="@+id/tv_thing_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            tools:text="Stok: 5 buah"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_thing_supplier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_below="@id/ll_thing_detail"
+        android:background="#ffddaa"
+        tools:text="Pabrik Roti Maju Terus"/>
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/tv_thing_supplier"
+        android:background="#000000"/>
+
+    <TextView
+        android:id="@+id/tv_admin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:gravity="right"
+        android:layout_below="@id/separator"
+        tools:text="Input by Admin 1"/>
+
+</RelativeLayout>
