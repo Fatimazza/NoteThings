@@ -58,6 +58,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
         bindViewToPresenter();
 
         loadDataThings();
+        checkEmptyData();
     }
 
     @Override
@@ -91,6 +92,11 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
         homeAdapter.updateListOfThings(listOfThings);
     }
 
+    private void checkEmptyData() {
+        tvEmpty.setVisibility(listOfThings.size()==0 ? View.VISIBLE : View.GONE);
+        rvListOfThings.setVisibility(listOfThings.size()==0 ? View.GONE : View.VISIBLE);
+    }
+
     public void addNewThingToList (View view) {
         isAddNew = true;
         Intent intent = new Intent(this, ManageThingsActivity.class);
@@ -102,6 +108,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
     protected void onResume() {
         super.onResume();
         loadDataThings();
+        checkEmptyData();
     }
 
     @Override
