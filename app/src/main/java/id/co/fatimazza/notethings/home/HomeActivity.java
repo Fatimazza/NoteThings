@@ -17,6 +17,7 @@ import java.util.List;
 import butterknife.BindView;
 import id.co.fatimazza.notethings.NoteThings;
 import id.co.fatimazza.notethings.R;
+import id.co.fatimazza.notethings.login.LoginActivity;
 import id.co.fatimazza.notethings.managethings.ManageThingsActivity;
 import id.co.fatimazza.notethings.base.BaseActivity;
 import id.co.fatimazza.notethings.database.DaoSession;
@@ -124,8 +125,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_login:
-                Toast.makeText(
-                    this, "Sudah Login?", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, LoginActivity.class));
                 return true;
         }
         return super.onOptionsItemSelected(item);
