@@ -18,6 +18,7 @@ public class AddThingsPresenter extends BasePresenter<AddThingsContract.View>
 
     @Override
     public void addNewThing(String name, String supplier, long quantity, String date) {
+        getDaoSession().getThingsDao().insert(new Things(null, name, supplier, String.valueOf(quantity), date));
         getView().showSuccessAddThing();
     }
 }

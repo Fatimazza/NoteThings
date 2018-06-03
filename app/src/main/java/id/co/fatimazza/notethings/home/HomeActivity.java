@@ -67,4 +67,10 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     public void addNewThingToList (View view) {
         startActivity(new Intent(this, AddThingsActivity.class));
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadDataThings();
+    }
 }
