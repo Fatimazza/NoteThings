@@ -5,4 +5,9 @@
         android:id="@+id/action_login"
         app:showAsAction="always"
         android:title="Login"/>
+    <item
+        android:id="@+id/action_logout"
+        android:visible="false"
+        app:showAsAction="always"
+        android:title="Logout"/>
 </menu>

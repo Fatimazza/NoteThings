@@ -52,6 +52,8 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
 
     private MenuItem menuLogin;
 
+    private MenuItem menuLogout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,6 +123,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
         checkEmptyData();
 
         if (null != menuLogin) menuLogin.setVisible(isLogin ? false : true);
+        if (null != menuLogout) menuLogout.setVisible(isLogin ? true : false);
     }
 
     @Override
@@ -142,6 +145,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         menuLogin = menu.findItem(R.id.action_login);
+        menuLogout = menu.findItem(R.id.action_logout);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -150,6 +154,11 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
         switch (item.getItemId()) {
             case R.id.action_login:
                 startActivity(new Intent(this, LoginActivity.class));
+                return true;
+            case R.id.action_logout:
+                isLogin = false;
+                menuLogin.setVisible(true);
+                menuLogout.setVisible(false);
                 return true;
         }
         return super.onOptionsItemSelected(item);
