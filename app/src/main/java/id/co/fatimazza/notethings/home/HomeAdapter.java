@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -69,6 +70,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
         View rootView;
 
+        @BindView(R.id.rl_things)
+        RelativeLayout rlThing;
+
         @BindView(R.id.tv_thing_name)
         TextView tvThingName;
 
@@ -98,6 +102,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
         public void setOnItemClickListener(final ItemListener itemListener) {
             if (rootView != null && itemListener != null) {
+                rlThing.setSelected(true);
                 rootView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
