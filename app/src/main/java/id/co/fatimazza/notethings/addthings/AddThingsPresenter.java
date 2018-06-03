@@ -2,6 +2,8 @@ package id.co.fatimazza.notethings.addthings;
 
 
 import id.co.fatimazza.notethings.base.BasePresenter;
+import id.co.fatimazza.notethings.database.DaoSession;
+import id.co.fatimazza.notethings.database.Things;
 
 /**
  * Created by fatimazza on 6/2/18.
@@ -10,8 +12,8 @@ import id.co.fatimazza.notethings.base.BasePresenter;
 public class AddThingsPresenter extends BasePresenter<AddThingsContract.View>
     implements AddThingsContract.Presenter {
 
-    public AddThingsPresenter() {
-
+    public AddThingsPresenter(DaoSession daoSession) {
+        super(daoSession);
     }
 
     @Override

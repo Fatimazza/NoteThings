@@ -10,8 +10,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import butterknife.BindView;
+import id.co.fatimazza.notethings.NoteThings;
 import id.co.fatimazza.notethings.R;
 import id.co.fatimazza.notethings.base.BaseActivity;
+import id.co.fatimazza.notethings.database.DaoSession;
 
 public class AddThingsActivity extends BaseActivity implements AddThingsContract.View {
 
@@ -29,10 +31,12 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
 
     private AddThingsPresenter addThingsPresenter;
 
+    private DaoSession daoSession;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        initDaoSession();
         initPresenter();
         bindViewToPresenter();
     }
@@ -42,8 +46,12 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
         return R.layout.activity_add_things;
     }
 
+    private void initDaoSession() {
+        daoSession = ((NoteThings) getApplication()).getDaoSession();
+    }
+
     private void initPresenter() {
-        addThingsPresenter = new AddThingsPresenter();
+        addThingsPresenter = new AddThingsPresenter(daoSession);
     }
 
     private void bindViewToPresenter() {
