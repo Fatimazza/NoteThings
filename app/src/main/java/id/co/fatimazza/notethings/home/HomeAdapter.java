@@ -25,15 +25,18 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     private Context context;
 
-    public HomeAdapter(Context context) {
+    private ItemListener itemListener;
+
+    public HomeAdapter(Context context, ItemListener listener) {
         this.context = context;
         thingsList = new ArrayList<>();
+        itemListener = listener;
     }
 
     @Override
     public HomeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rootview = LayoutInflater.from(context).inflate(R.layout.item_things, parent, false);
-        return new HomeViewHolder(rootview);
+        return new HomeViewHolder(rootview, itemListener);
     }
 
     @Override
@@ -44,6 +47,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             holder.tvThingDate.setText(thingsList.get(position).getDate());
             holder.tvThingSupplier.setText(thingsList.get(position).getSupplier());
         }
+        holder.setOnItemClickListener(itemListener);
     }
 
     @Override
@@ -55,6 +59,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         this.thingsList.clear();
         this.thingsList.addAll(thingList);
         notifyDataSetChanged();
+    }
+
+    public List<Things> getListOfThings() {
+        return thingsList;
     }
 
     public static class HomeViewHolder extends RecyclerView.ViewHolder {
@@ -73,7 +81,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         @BindView(R.id.tv_thing_date)
         TextView tvThingDate;
 
-        public HomeViewHolder(View itemView) {
+        ItemListener itemListener;
+
+        public HomeViewHolder(View itemView, final ItemListener itemListener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 
@@ -82,7 +92,24 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             tvThingQuantity = rootView.findViewById(R.id.tv_thing_quantity);
             tvThingSupplier = rootView.findViewById(R.id.tv_thing_supplier);
             tvThingDate = rootView.findViewById(R.id.tv_thing_date);
+
+            this.itemListener = itemListener;
         }
+
+        public void setOnItemClickListener(final ItemListener itemListener) {
+            if (rootView != null && itemListener != null) {
+                rootView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        itemListener.onItemClick(getAdapterPosition());
+                    }
+                });
+            }
+        }
+    }
+
+    public interface ItemListener {
+        void onItemClick(int position);
     }
 
 }

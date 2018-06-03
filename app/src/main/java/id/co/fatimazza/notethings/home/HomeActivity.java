@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ import id.co.fatimazza.notethings.base.BaseActivity;
 import id.co.fatimazza.notethings.database.DaoSession;
 import id.co.fatimazza.notethings.database.Things;
 
-public class HomeActivity extends BaseActivity implements HomeContract.View {
+public class HomeActivity extends BaseActivity implements HomeContract.View, HomeAdapter.ItemListener {
 
     @BindView(R.id.rv_listof_things)
     public RecyclerView rvListOfThings;
@@ -49,7 +50,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     }
 
     private void initAdapter() {
-        homeAdapter = new HomeAdapter(this);
+        homeAdapter = new HomeAdapter(HomeActivity.this, this);
 
         rvListOfThings.setLayoutManager(new LinearLayoutManager(this));
         rvListOfThings.setAdapter(homeAdapter);
@@ -72,5 +73,12 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     protected void onResume() {
         super.onResume();
         loadDataThings();
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Things things = homeAdapter.getListOfThings().get(position);
+        Toast.makeText(this,
+            "Selected data: " +things.getId() +" " +things.getName() +" " +things.getQuantity(), Toast.LENGTH_SHORT).show();
     }
 }
