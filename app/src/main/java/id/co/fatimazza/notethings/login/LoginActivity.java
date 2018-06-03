@@ -78,11 +78,13 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
     public void doLogin (View view) {
-        if (TextUtils.isEmpty(etUsername.getText().toString())
-            || TextUtils.isEmpty(etPassword.getText().toString())) {
+        String username = etUsername.getText().toString();
+        String password = etPassword.getText().toString();
+        if (TextUtils.isEmpty(username)
+            || TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_LONG).show();
         } else {
-
+            loginPresenter.logInUser(username, password);
         }
     }
 
@@ -96,6 +98,16 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
             Toast.makeText(this, "Password and Confirmation do not match", Toast.LENGTH_LONG).show();
         } else {
 
+        }
+    }
+
+    @Override
+    public void logInStatus(boolean status) {
+        if (status) {
+            Toast.makeText(this, "Login Success", Toast.LENGTH_LONG).show();
+            finish();
+        } else {
+            Toast.makeText(this, "Username or Password do not match", Toast.LENGTH_LONG).show();
         }
     }
 

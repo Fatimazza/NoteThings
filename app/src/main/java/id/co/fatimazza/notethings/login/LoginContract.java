@@ -10,9 +10,12 @@ public interface LoginContract {
 
     interface View extends BaseContractView {
 
+        void logInStatus(boolean status);
     }
 
     interface Presenter {
+
+        void logInUser(String username, String password);
 
     }
 }

@@ -30,7 +30,7 @@ public class NoteThings extends Application {
         }
         if(daoSession.getUserDao().loadAll().size() == 0){
             daoSession.getUserDao().insert(
-                new User(1L, "Admin", "Admin", "03/06/2018"));
+                new User(1L, "admin", "123456", "03/06/2018"));
         }
     }
 
