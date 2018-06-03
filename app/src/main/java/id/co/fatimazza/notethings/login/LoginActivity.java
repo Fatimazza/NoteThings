@@ -12,10 +12,12 @@ import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import id.co.fatimazza.notethings.NoteThings;
 import id.co.fatimazza.notethings.R;
 import id.co.fatimazza.notethings.base.BaseActivity;
+import id.co.fatimazza.notethings.database.DaoSession;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @BindView(R.id.tv_login_register)
     TextView tvLoginRegister;
@@ -35,12 +37,18 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.btn_register)
     Button btnRegister;
 
+    private LoginPresenter loginPresenter;
+
+    private DaoSession daoSession;
+
     boolean isRegistered = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initView();
+        initDaoSession();
+        initPresenter();
+        bindViewToPresenter();
     }
 
     @Override
@@ -48,8 +56,16 @@ public class LoginActivity extends BaseActivity {
         return R.layout.activity_login;
     }
 
+    private void initDaoSession() {
+        daoSession = ((NoteThings) getApplication()).getDaoSession();
+    }
 
-    private void initView() {
+    private void initPresenter() {
+        loginPresenter = new LoginPresenter(daoSession);
+    }
+
+    private void bindViewToPresenter() {
+        loginPresenter.setView(this);
     }
 
     @OnClick(R.id.tv_login_register)
