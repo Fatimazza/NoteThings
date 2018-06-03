@@ -12,11 +12,15 @@ public interface AddThingsContract {
 
         void showSuccessAddThing();
 
+        void showSuccessDeleteThing();
+
     }
 
     interface Presenter {
 
         void addNewThing(String name, String supplier, long quantity, String date);
+
+        void deleteThing(long id);
 
     }
 

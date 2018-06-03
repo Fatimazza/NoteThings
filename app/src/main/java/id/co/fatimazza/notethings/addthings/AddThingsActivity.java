@@ -39,6 +39,8 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
 
     private DaoSession daoSession;
 
+    long idThing = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +78,8 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
                     && intent.hasExtra(HomeActivity.EXTRA_THING_QUANTITY)
                     && intent.hasExtra(HomeActivity.EXTRA_THING_SUPPLIER)
                     && intent.hasExtra(HomeActivity.EXTRA_THING_DATE)){
+
+                    idThing = intent.getLongExtra(HomeActivity.EXTRA_THING_ID, -1);
                     setUpManageThings();
                 }
             }
@@ -100,12 +104,20 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
     }
 
     public void deleteThing (View view) {
-
+        if (idThing >= 0) {
+            addThingsPresenter.deleteThing(idThing);
+        }
     }
 
     @Override
     public void showSuccessAddThing() {
         Toast.makeText(this, "Data sucessfully added", Toast.LENGTH_LONG).show();
+        finish();
+    }
+
+    @Override
+    public void showSuccessDeleteThing() {
+        Toast.makeText(this, "Data sucessfully deleted", Toast.LENGTH_LONG).show();
         finish();
     }
 

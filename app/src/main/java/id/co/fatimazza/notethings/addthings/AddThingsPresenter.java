@@ -21,4 +21,15 @@ public class AddThingsPresenter extends BasePresenter<AddThingsContract.View>
         getDaoSession().getThingsDao().insert(new Things(null, name, supplier, String.valueOf(quantity), date));
         getView().showSuccessAddThing();
     }
+
+    @Override
+    public void deleteThing(long id) {
+        for (Things things : getDaoSession().getThingsDao().loadAll()) {
+            if (id==things.getId()) {
+                getDaoSession().getThingsDao().delete(things);
+                getView().showSuccessDeleteThing();
+                break;
+            }
+        }
+    }
 }
