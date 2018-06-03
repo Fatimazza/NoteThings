@@ -89,15 +89,18 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
     public void doRegister (View view) {
-        if (TextUtils.isEmpty(etUsername.getText().toString())
-            || TextUtils.isEmpty(etPassword.getText().toString())
-            || TextUtils.isEmpty(etConfirmPassword.getText().toString())) {
+        String username = etUsername.getText().toString();
+        String password = etPassword.getText().toString();
+        String confirm = etConfirmPassword.getText().toString();
+        if (TextUtils.isEmpty(username)
+            || TextUtils.isEmpty(password)
+            || TextUtils.isEmpty(confirm)) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_LONG).show();
         } else if (!etConfirmPassword.getText().toString()
             .equals(etPassword.getText().toString())) {
             Toast.makeText(this, "Password and Confirmation do not match", Toast.LENGTH_LONG).show();
         } else {
-
+            loginPresenter.registerUser(username, password);
         }
     }
 
@@ -109,6 +112,21 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         } else {
             Toast.makeText(this, "Username or Password do not match", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void registerStatus(boolean isRegistered) {
+        if (isRegistered) {
+            Toast.makeText(this, "Failed to register, Already exist", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Registration Success", Toast.LENGTH_LONG).show();
+            finish();
+        }
+    }
+
+    @Override
+    public void showMaxRegistration() {
+        Toast.makeText(this, "Failed. Max 5 Users already registered.", Toast.LENGTH_LONG).show();
     }
 
     @Override

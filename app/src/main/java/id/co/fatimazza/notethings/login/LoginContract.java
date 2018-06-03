@@ -11,11 +11,17 @@ public interface LoginContract {
     interface View extends BaseContractView {
 
         void logInStatus(boolean status);
+
+        void registerStatus(boolean status);
+
+        void showMaxRegistration();
     }
 
     interface Presenter {
 
         void logInUser(String username, String password);
+
+        void registerUser(String username, String password);
 
     }
 }
