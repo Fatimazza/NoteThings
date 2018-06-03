@@ -1,5 +1,6 @@
 package id.co.fatimazza.notethings.addthings;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NavUtils;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import id.co.fatimazza.notethings.NoteThings;
 import id.co.fatimazza.notethings.R;
 import id.co.fatimazza.notethings.base.BaseActivity;
 import id.co.fatimazza.notethings.database.DaoSession;
+import id.co.fatimazza.notethings.home.HomeActivity;
 
 public class AddThingsActivity extends BaseActivity implements AddThingsContract.View {
 
@@ -43,6 +45,8 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
         initDaoSession();
         initPresenter();
         bindViewToPresenter();
+
+        loadIntentExtras();
     }
 
     @Override
@@ -62,8 +66,21 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
         addThingsPresenter.setView(this);
     }
 
-    public void addThing (View view) {
+    private void loadIntentExtras() {
+        Intent intent = getIntent();
+        if (null != intent && intent.hasExtra(HomeActivity.EXTRA_IS_ADD_NEW)) {
+            boolean isAdd = intent.getBooleanExtra(HomeActivity.EXTRA_IS_ADD_NEW, false);
+            if (!isAdd) {
+                setUpManageThings();
+            }
+        }
+    }
 
+    private void setUpManageThings() {
+        fabRemove.setVisibility(View.VISIBLE);
+    }
+
+    public void addThing (View view) {
         if (TextUtils.isEmpty(etNameOfThing.getText().toString())
             || TextUtils.isEmpty(spSupplier.getSelectedItem().toString())
             || TextUtils.isEmpty(etQuantity.getText().toString())

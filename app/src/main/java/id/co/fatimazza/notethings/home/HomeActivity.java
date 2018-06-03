@@ -22,6 +22,8 @@ import id.co.fatimazza.notethings.database.Things;
 
 public class HomeActivity extends BaseActivity implements HomeContract.View, HomeAdapter.ItemListener {
 
+    public static final String EXTRA_IS_ADD_NEW = "is_add_new";
+
     @BindView(R.id.rv_listof_things)
     public RecyclerView rvListOfThings;
 
@@ -38,6 +40,8 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
     private DaoSession daoSession;
 
     private List<Things> listOfThings;
+
+    boolean isAddNew = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +87,10 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
     }
 
     public void addNewThingToList (View view) {
-        startActivity(new Intent(this, AddThingsActivity.class));
+        isAddNew = true;
+        Intent intent = new Intent(this, AddThingsActivity.class);
+        intent.putExtra(EXTRA_IS_ADD_NEW, isAddNew);
+        startActivity(intent);
     }
 
     @Override
@@ -94,8 +101,14 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
 
     @Override
     public void onItemClick(int position) {
+        isAddNew = false;
+
         Things things = homeAdapter.getListOfThings().get(position);
         Toast.makeText(this,
             "Selected data: " +things.getId() +" " +things.getName() +" " +things.getQuantity(), Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this, AddThingsActivity.class);
+        intent.putExtra(EXTRA_IS_ADD_NEW, isAddNew);
+        startActivity(intent);
     }
 }
