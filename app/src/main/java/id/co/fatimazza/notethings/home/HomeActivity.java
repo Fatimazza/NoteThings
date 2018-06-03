@@ -3,6 +3,7 @@ package id.co.fatimazza.notethings.home;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -23,14 +24,25 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     @BindView(R.id.fab_add)
     public FloatingActionButton fabAdd;
 
+    private HomeAdapter homeAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initView();
     }
 
     @Override
     public int getLayout() {
         return R.layout.activity_home;
+    }
+
+    private void initView() {
+        homeAdapter = new HomeAdapter(this);
+
+        rvListOfThings.setLayoutManager(new LinearLayoutManager(this));
+        rvListOfThings.setAdapter(homeAdapter);
+        homeAdapter.notifyDataSetChanged();
     }
 
     public void addNewThingToList (View view) {
