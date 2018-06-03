@@ -34,14 +34,16 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
     private HomeAdapter homeAdapter;
 
     private DaoSession daoSession;
+
     private List<Things> listOfThings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initAdapter();
+
+        initDaoSession();
         loadDataThings();
-        homeAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -56,9 +58,12 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
         rvListOfThings.setAdapter(homeAdapter);
     }
 
-    private void loadDataThings() {
+    private void initDaoSession() {
         daoSession = ((NoteThings) getApplication()).getDaoSession();
+    }
 
+
+    private void loadDataThings() {
         listOfThings = new ArrayList<>();
         listOfThings = daoSession.getThingsDao().loadAll();
 
