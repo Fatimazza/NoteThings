@@ -2,10 +2,13 @@ package id.co.fatimazza.notethings.login;
 
 import android.support.v4.app.NavUtils;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -17,11 +20,14 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.tv_login_register)
     TextView tvLoginRegister;
 
+    @BindView(R.id.et_username)
+    EditText etUsername;
+
     @BindView(R.id.et_password)
-    TextView etPassword;
+    EditText etPassword;
 
     @BindView(R.id.et_confirm)
-    TextView etConfirmPassword;
+    EditText etConfirmPassword;
 
     @BindView(R.id.btn_login)
     Button btnLogin;
@@ -52,7 +58,29 @@ public class LoginActivity extends BaseActivity {
         etConfirmPassword.setVisibility(isRegistered ? View.GONE : View.VISIBLE);
         btnRegister.setVisibility(isRegistered ? View.GONE : View.VISIBLE);
         btnLogin.setVisibility(isRegistered ? View.VISIBLE : View.GONE);
-        tvLoginRegister.setText(isRegistered ? "Belum punya akun?" : "Sudah punya akun?");
+        tvLoginRegister.setText(isRegistered ? "Not Yet Registered?" : "Already Registered?");
+    }
+
+    public void doLogin (View view) {
+        if (TextUtils.isEmpty(etUsername.getText().toString())
+            || TextUtils.isEmpty(etPassword.getText().toString())) {
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_LONG).show();
+        } else {
+
+        }
+    }
+
+    public void doRegister (View view) {
+        if (TextUtils.isEmpty(etUsername.getText().toString())
+            || TextUtils.isEmpty(etPassword.getText().toString())
+            || TextUtils.isEmpty(etConfirmPassword.getText().toString())) {
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_LONG).show();
+        } else if (!etConfirmPassword.getText().toString()
+            .equals(etPassword.getText().toString())) {
+            Toast.makeText(this, "Password and Confirmation do not match", Toast.LENGTH_LONG).show();
+        } else {
+
+        }
     }
 
     @Override
