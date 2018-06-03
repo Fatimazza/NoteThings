@@ -116,6 +116,13 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
             || TextUtils.isEmpty(etQuantity.getText().toString())
             || TextUtils.isEmpty(etDate.getText().toString())) {
             Toast.makeText(this, "Please fill in all data", Toast.LENGTH_LONG).show();
+        } else {
+            addThingsPresenter.editThing(
+                idThing,
+                etNameOfThing.getText().toString(),
+                etQuantity.getText().toString(),
+                spSupplier.getSelectedItem().toString(),
+                etDate.getText().toString());
         }
     }
 
@@ -150,6 +157,12 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
                 break;
             }
         }
+    }
+
+    @Override
+    public void showSuccessEditThing() {
+        Toast.makeText(this, "Data sucessfully edited", Toast.LENGTH_LONG).show();
+        finish();
     }
 
     @Override

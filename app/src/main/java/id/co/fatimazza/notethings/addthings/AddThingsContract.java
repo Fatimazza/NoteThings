@@ -19,6 +19,8 @@ public interface AddThingsContract {
 
         void showSuccessLoadDataThing(List<Things> listOfThingById);
 
+        void showSuccessEditThing();
+
     }
 
     interface Presenter {
@@ -29,6 +31,7 @@ public interface AddThingsContract {
 
         void loadDataThing(long id);
 
+        void editThing(long id, String name, String quantity, String supplier, String date);
     }
 
 }

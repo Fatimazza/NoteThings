@@ -48,4 +48,19 @@ public class AddThingsPresenter extends BasePresenter<AddThingsContract.View>
             }
         }
     }
+
+    @Override
+    public void editThing(long id, String name, String quantity, String supplier, String date) {
+        for (Things things : getDaoSession().getThingsDao().loadAll()) {
+            if (id==things.getId()) {
+                things.setName(name);
+                things.setQuantity(quantity);
+                things.setSupplier(supplier);
+                things.setDate(date);
+                getDaoSession().getThingsDao().update(things);
+                getView().showSuccessEditThing();
+                break;
+            }
+        }
+    }
 }
