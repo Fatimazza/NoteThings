@@ -1,4 +1,4 @@
-package id.co.fatimazza.notethings.addthings;
+package id.co.fatimazza.notethings.managethings;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import id.co.fatimazza.notethings.database.Things;
  * Created by fatimazza on 6/2/18.
  */
 
-public interface AddThingsContract {
+public interface ManageThingsContract {
 
     interface View extends BaseContractView {
 

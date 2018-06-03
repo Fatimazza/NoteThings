@@ -21,7 +21,7 @@
         </activity>
 
         <activity
-            android:name=".addthings.AddThingsActivity"
+            android:name=".managethings.ManageThingsActivity"
             android:parentActivityName=".home.HomeActivity">
         </activity>
     </application>

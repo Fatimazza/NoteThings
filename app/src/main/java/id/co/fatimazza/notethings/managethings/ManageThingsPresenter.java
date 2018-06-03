@@ -1,4 +1,4 @@
-package id.co.fatimazza.notethings.addthings;
+package id.co.fatimazza.notethings.managethings;
 
 
 import java.util.List;
@@ -12,10 +12,10 @@ import id.co.fatimazza.notethings.database.ThingsDao;
  * Created by fatimazza on 6/2/18.
  */
 
-public class AddThingsPresenter extends BasePresenter<AddThingsContract.View>
-    implements AddThingsContract.Presenter {
+public class ManageThingsPresenter extends BasePresenter<ManageThingsContract.View>
+    implements ManageThingsContract.Presenter {
 
-    public AddThingsPresenter(DaoSession daoSession) {
+    public ManageThingsPresenter(DaoSession daoSession) {
         super(daoSession);
     }
 

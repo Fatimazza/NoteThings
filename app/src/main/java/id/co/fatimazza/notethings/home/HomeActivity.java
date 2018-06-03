@@ -14,7 +14,7 @@ import java.util.List;
 import butterknife.BindView;
 import id.co.fatimazza.notethings.NoteThings;
 import id.co.fatimazza.notethings.R;
-import id.co.fatimazza.notethings.addthings.AddThingsActivity;
+import id.co.fatimazza.notethings.managethings.ManageThingsActivity;
 import id.co.fatimazza.notethings.base.BaseActivity;
 import id.co.fatimazza.notethings.database.DaoSession;
 import id.co.fatimazza.notethings.database.Things;
@@ -89,7 +89,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
 
     public void addNewThingToList (View view) {
         isAddNew = true;
-        Intent intent = new Intent(this, AddThingsActivity.class);
+        Intent intent = new Intent(this, ManageThingsActivity.class);
         intent.putExtra(EXTRA_IS_ADD_NEW, isAddNew);
         startActivity(intent);
     }
@@ -105,7 +105,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
         isAddNew = false;
 
         Things things = homeAdapter.getListOfThings().get(position);
-        Intent intent = new Intent(this, AddThingsActivity.class);
+        Intent intent = new Intent(this, ManageThingsActivity.class);
         intent.putExtra(EXTRA_IS_ADD_NEW, isAddNew);
         intent.putExtra(EXTRA_THING_ID, things.getId());
         startActivity(intent);

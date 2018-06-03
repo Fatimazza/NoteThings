@@ -1,4 +1,4 @@
-package id.co.fatimazza.notethings.addthings;
+package id.co.fatimazza.notethings.managethings;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
@@ -21,7 +21,7 @@ import id.co.fatimazza.notethings.database.DaoSession;
 import id.co.fatimazza.notethings.database.Things;
 import id.co.fatimazza.notethings.home.HomeActivity;
 
-public class AddThingsActivity extends BaseActivity implements AddThingsContract.View {
+public class ManageThingsActivity extends BaseActivity implements ManageThingsContract.View {
 
     @BindView(R.id.et_nameof_thing)
     public EditText etNameOfThing;
@@ -44,7 +44,7 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
     @BindView(R.id.fab_remove)
     public FloatingActionButton fabRemove;
 
-    private AddThingsPresenter addThingsPresenter;
+    private ManageThingsPresenter manageThingsPresenter;
 
     private DaoSession daoSession;
 
@@ -70,11 +70,11 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
     }
 
     private void initPresenter() {
-        addThingsPresenter = new AddThingsPresenter(daoSession);
+        manageThingsPresenter = new ManageThingsPresenter(daoSession);
     }
 
     private void bindViewToPresenter() {
-        addThingsPresenter.setView(this);
+        manageThingsPresenter.setView(this);
     }
 
     private void loadIntentExtras() {
@@ -94,7 +94,7 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
         fabAdd.setVisibility(View.GONE);
         fabEdit.setVisibility(View.VISIBLE);
         fabRemove.setVisibility(View.VISIBLE);
-        addThingsPresenter.loadDataThing(id);
+        manageThingsPresenter.loadDataThing(id);
     }
 
     public void addThing (View view) {
@@ -104,7 +104,7 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
             || TextUtils.isEmpty(etDate.getText().toString())) {
             Toast.makeText(this, "Please fill in all data", Toast.LENGTH_LONG).show();
         } else {
-            addThingsPresenter.addNewThing(
+            manageThingsPresenter.addNewThing(
                 etNameOfThing.getText().toString(), spSupplier.getSelectedItem().toString(),
                 Long.valueOf(etQuantity.getText().toString()), etDate.getText().toString());
         }
@@ -117,7 +117,7 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
             || TextUtils.isEmpty(etDate.getText().toString())) {
             Toast.makeText(this, "Please fill in all data", Toast.LENGTH_LONG).show();
         } else {
-            addThingsPresenter.editThing(
+            manageThingsPresenter.editThing(
                 idThing,
                 etNameOfThing.getText().toString(),
                 etQuantity.getText().toString(),
@@ -128,7 +128,7 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
 
     public void deleteThing (View view) {
         if (idThing >= 0) {
-            addThingsPresenter.deleteThing(idThing);
+            manageThingsPresenter.deleteThing(idThing);
         }
     }
 
