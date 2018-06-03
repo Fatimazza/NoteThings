@@ -7,23 +7,11 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp">
 
-    <TextView
-        android:id="@+id/tv_thing_date"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:textSize="16sp"
-        tools:text="22 Januari 2018"
-        android:gravity="center"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_above="@id/tv_thing_supplier"/>
-
     <LinearLayout
         android:id="@+id/ll_thing_detail"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@id/tv_thing_date"
         android:orientation="vertical">
 
         <TextView
@@ -51,6 +39,18 @@
         android:layout_below="@id/ll_thing_detail"
         android:background="#ffddaa"
         tools:text="Pabrik Roti Maju Terus"/>
+
+    <TextView
+        android:id="@+id/tv_thing_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        tools:text="22 Januari 2018"
+        android:layout_toRightOf="@id/ll_thing_detail"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center|end"
+        android:layout_above="@id/tv_thing_supplier"/>
 
     <View
         android:id="@+id/separator"
