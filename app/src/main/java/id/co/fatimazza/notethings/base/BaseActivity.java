@@ -33,6 +33,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     public abstract int getLayout();
 
     @Override
+    protected void onDestroy() {
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
+        super.onDestroy();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
