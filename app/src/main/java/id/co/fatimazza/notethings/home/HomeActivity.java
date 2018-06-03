@@ -12,7 +12,7 @@ import id.co.fatimazza.notethings.R;
 import id.co.fatimazza.notethings.addthings.AddThingsActivity;
 import id.co.fatimazza.notethings.base.BaseActivity;
 
-public class HomeActivity extends BaseActivity {
+public class HomeActivity extends BaseActivity implements HomeContract.View {
 
     @BindView(R.id.rv_listof_things)
     public RecyclerView rvListOfThings;
