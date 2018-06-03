@@ -3,6 +3,7 @@ package id.co.fatimazza.notethings.login;
 
 import id.co.fatimazza.notethings.base.BasePresenter;
 import id.co.fatimazza.notethings.database.DaoSession;
+import id.co.fatimazza.notethings.database.User;
 import id.co.fatimazza.notethings.database.UserDao;
 
 /**
@@ -39,6 +40,8 @@ public class LoginPresenter extends BasePresenter<LoginContract.View>
             .list().size() == 1) {
             getView().registerStatus(isRegistered);
         } else {
+            getDaoSession().getUserDao().insert(
+                new User(null, username, password, "04/06/2018"));
             getView().registerStatus(!isRegistered);
         }
     }
