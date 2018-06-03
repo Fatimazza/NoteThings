@@ -35,6 +35,12 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
     @BindView(R.id.et_date)
     public EditText etDate;
 
+    @BindView(R.id.fab_add)
+    public FloatingActionButton fabAdd;
+
+    @BindView(R.id.fab_edit)
+    public FloatingActionButton fabEdit;
+
     @BindView(R.id.fab_remove)
     public FloatingActionButton fabRemove;
 
@@ -85,6 +91,8 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
     }
 
     private void setUpManageThings(long id) {
+        fabAdd.setVisibility(View.GONE);
+        fabEdit.setVisibility(View.VISIBLE);
         fabRemove.setVisibility(View.VISIBLE);
         addThingsPresenter.loadDataThing(id);
     }
@@ -99,6 +107,15 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
             addThingsPresenter.addNewThing(
                 etNameOfThing.getText().toString(), spSupplier.getSelectedItem().toString(),
                 Long.valueOf(etQuantity.getText().toString()), etDate.getText().toString());
+        }
+    }
+
+    public void editThing (View view) {
+        if (TextUtils.isEmpty(etNameOfThing.getText().toString())
+            || TextUtils.isEmpty(spSupplier.getSelectedItem().toString())
+            || TextUtils.isEmpty(etQuantity.getText().toString())
+            || TextUtils.isEmpty(etDate.getText().toString())) {
+            Toast.makeText(this, "Please fill in all data", Toast.LENGTH_LONG).show();
         }
     }
 
