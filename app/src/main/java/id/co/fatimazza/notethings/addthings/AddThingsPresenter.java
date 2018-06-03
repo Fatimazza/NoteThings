@@ -1,9 +1,12 @@
 package id.co.fatimazza.notethings.addthings;
 
 
+import java.util.List;
+
 import id.co.fatimazza.notethings.base.BasePresenter;
 import id.co.fatimazza.notethings.database.DaoSession;
 import id.co.fatimazza.notethings.database.Things;
+import id.co.fatimazza.notethings.database.ThingsDao;
 
 /**
  * Created by fatimazza on 6/2/18.
@@ -28,6 +31,19 @@ public class AddThingsPresenter extends BasePresenter<AddThingsContract.View>
             if (id==things.getId()) {
                 getDaoSession().getThingsDao().delete(things);
                 getView().showSuccessDeleteThing();
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void loadDataThing(long id) {
+        for (Things things : getDaoSession().getThingsDao().loadAll()) {
+            if (id==things.getId()) {
+                List<Things> listThingById = getDaoSession().getThingsDao().queryBuilder().where(
+                    ThingsDao.Properties.Id.in(id)
+                ).list();
+                getView().showSuccessLoadDataThing(listThingById);
                 break;
             }
         }

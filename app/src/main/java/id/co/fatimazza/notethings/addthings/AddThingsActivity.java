@@ -11,11 +11,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.List;
+
 import butterknife.BindView;
 import id.co.fatimazza.notethings.NoteThings;
 import id.co.fatimazza.notethings.R;
 import id.co.fatimazza.notethings.base.BaseActivity;
 import id.co.fatimazza.notethings.database.DaoSession;
+import id.co.fatimazza.notethings.database.Things;
 import id.co.fatimazza.notethings.home.HomeActivity;
 
 public class AddThingsActivity extends BaseActivity implements AddThingsContract.View {
@@ -39,7 +42,7 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
 
     private DaoSession daoSession;
 
-    long idThing = -1;
+    private long idThing = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,14 +78,15 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
             if (!isAdd) {
                 if (intent.hasExtra(HomeActivity.EXTRA_THING_ID)){
                     idThing = intent.getLongExtra(HomeActivity.EXTRA_THING_ID, -1);
-                    setUpManageThings();
+                    setUpManageThings(idThing);
                 }
             }
         }
     }
 
-    private void setUpManageThings() {
+    private void setUpManageThings(long id) {
         fabRemove.setVisibility(View.VISIBLE);
+        addThingsPresenter.loadDataThing(id);
     }
 
     public void addThing (View view) {
@@ -114,6 +118,21 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
     public void showSuccessDeleteThing() {
         Toast.makeText(this, "Data sucessfully deleted", Toast.LENGTH_LONG).show();
         finish();
+    }
+
+    @Override
+    public void showSuccessLoadDataThing(List<Things> listOfThingById) {
+        etNameOfThing.setText(listOfThingById.get(0).getName());
+        etQuantity.setText(listOfThingById.get(0).getQuantity());
+        etDate.setText(listOfThingById.get(0).getDate());
+
+        for(int i= 0; i < spSupplier.getAdapter().getCount(); i++) {
+            if(spSupplier.getAdapter().getItem(i).toString()
+                .contains(listOfThingById.get(0).getSupplier())) {
+                spSupplier.setSelection(i);
+                break;
+            }
+        }
     }
 
     @Override
