@@ -48,6 +48,8 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
 
     boolean isAddNew = false;
 
+    public static boolean isLogin = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,9 +101,15 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
 
     public void addNewThingToList (View view) {
         isAddNew = true;
-        Intent intent = new Intent(this, ManageThingsActivity.class);
-        intent.putExtra(EXTRA_IS_ADD_NEW, isAddNew);
-        startActivity(intent);
+
+        if (isLogin) {
+            Intent intent = new Intent(this, ManageThingsActivity.class);
+            intent.putExtra(EXTRA_IS_ADD_NEW, isAddNew);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Please Login to Add data", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     @Override
@@ -115,11 +123,15 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
     public void onItemClick(int position) {
         isAddNew = false;
 
-        Things things = homeAdapter.getListOfThings().get(position);
-        Intent intent = new Intent(this, ManageThingsActivity.class);
-        intent.putExtra(EXTRA_IS_ADD_NEW, isAddNew);
-        intent.putExtra(EXTRA_THING_ID, things.getId());
-        startActivity(intent);
+        if (isLogin) {
+            Things things = homeAdapter.getListOfThings().get(position);
+            Intent intent = new Intent(this, ManageThingsActivity.class);
+            intent.putExtra(EXTRA_IS_ADD_NEW, isAddNew);
+            intent.putExtra(EXTRA_THING_ID, things.getId());
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Please Login to Manage data", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

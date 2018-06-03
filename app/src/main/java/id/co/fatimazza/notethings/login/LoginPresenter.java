@@ -3,7 +3,6 @@ package id.co.fatimazza.notethings.login;
 
 import id.co.fatimazza.notethings.base.BasePresenter;
 import id.co.fatimazza.notethings.database.DaoSession;
-import id.co.fatimazza.notethings.database.ThingsDao;
 import id.co.fatimazza.notethings.database.UserDao;
 
 /**

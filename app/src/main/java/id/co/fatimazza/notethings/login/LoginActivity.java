@@ -16,6 +16,7 @@ import id.co.fatimazza.notethings.NoteThings;
 import id.co.fatimazza.notethings.R;
 import id.co.fatimazza.notethings.base.BaseActivity;
 import id.co.fatimazza.notethings.database.DaoSession;
+import id.co.fatimazza.notethings.home.HomeActivity;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View {
 
@@ -108,6 +109,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     public void logInStatus(boolean status) {
         if (status) {
             Toast.makeText(this, "Login Success", Toast.LENGTH_LONG).show();
+            HomeActivity.isLogin = true;
             finish();
         } else {
             Toast.makeText(this, "Username or Password do not match", Toast.LENGTH_LONG).show();
