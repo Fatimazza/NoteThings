@@ -8,10 +8,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
+import id.co.fatimazza.notethings.NoteThings;
 import id.co.fatimazza.notethings.R;
 import id.co.fatimazza.notethings.addthings.AddThingsActivity;
 import id.co.fatimazza.notethings.base.BaseActivity;
+import id.co.fatimazza.notethings.database.DaoSession;
+import id.co.fatimazza.notethings.database.Things;
 
 public class HomeActivity extends BaseActivity implements HomeContract.View {
 
@@ -26,10 +32,15 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
 
     private HomeAdapter homeAdapter;
 
+    private DaoSession daoSession;
+    private List<Things> listOfThings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initView();
+        initAdapter();
+        loadDataThings();
+        homeAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -37,12 +48,20 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         return R.layout.activity_home;
     }
 
-    private void initView() {
+    private void initAdapter() {
         homeAdapter = new HomeAdapter(this);
 
         rvListOfThings.setLayoutManager(new LinearLayoutManager(this));
         rvListOfThings.setAdapter(homeAdapter);
-        homeAdapter.notifyDataSetChanged();
+    }
+
+    private void loadDataThings() {
+        daoSession = ((NoteThings) getApplication()).getDaoSession();
+
+        listOfThings = new ArrayList<>();
+        listOfThings = daoSession.getThingsDao().loadAll();
+
+        homeAdapter.updateListOfThings(listOfThings);
     }
 
     public void addNewThingToList (View view) {

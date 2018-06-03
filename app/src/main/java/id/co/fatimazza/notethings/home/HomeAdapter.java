@@ -7,9 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.co.fatimazza.notethings.R;
+import id.co.fatimazza.notethings.database.Things;
 
 /**
  * Created by fatimazza on 6/3/18.
@@ -17,12 +21,13 @@ import id.co.fatimazza.notethings.R;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
 
-    private String [] dummyHome = { "Data1", "Data2", "Data3"};
+    private List<Things> thingsList;
 
     private Context context;
 
     public HomeAdapter(Context context) {
         this.context = context;
+        thingsList = new ArrayList<>();
     }
 
     @Override
@@ -33,21 +38,22 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     @Override
     public void onBindViewHolder(HomeViewHolder holder, int position) {
-        String dummyHomeData = dummyHome[position];
-        holder.tvThingName.setText(dummyHomeData);
-        holder.tvThingQuantity.setText(dummyHomeData);
-        holder.tvThingDate.setText(dummyHomeData);
-        holder.tvThingSupplier.setText(dummyHomeData);
+        if (null != thingsList) {
+            holder.tvThingName.setText(thingsList.get(position).getName());
+            holder.tvThingQuantity.setText(thingsList.get(position).getQuantity());
+            holder.tvThingDate.setText(thingsList.get(position).getDate());
+            holder.tvThingSupplier.setText(thingsList.get(position).getSupplier());
+        }
     }
 
     @Override
     public int getItemCount() {
-        if (null == dummyHome) return 0;
-        return dummyHome.length;
+        return (null != thingsList) ? thingsList.size() : 0;
     }
 
-    void setListOfThingsData(String[] homeData) {
-        dummyHome = homeData;
+    void updateListOfThings(List<Things> thingList) {
+        this.thingsList.clear();
+        this.thingsList.addAll(thingList);
         notifyDataSetChanged();
     }
 
