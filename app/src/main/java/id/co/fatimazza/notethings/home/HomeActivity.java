@@ -50,6 +50,8 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
 
     public static boolean isLogin = false;
 
+    private MenuItem menuLogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,6 +119,8 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
         super.onResume();
         loadDataThings();
         checkEmptyData();
+
+        if (null != menuLogin) menuLogin.setVisible(isLogin ? false : true);
     }
 
     @Override
@@ -137,6 +141,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View, Hom
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
+        menuLogin = menu.findItem(R.id.action_login);
         return super.onCreateOptionsMenu(menu);
     }
 
