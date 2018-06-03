@@ -23,9 +23,10 @@ public class NoteThings extends Application {
         daoSession = new DaoMaster(
             new DaoMaster.DevOpenHelper(this, "note_things.db").getWritableDatabase()).newSession();
 
-        //dummy data
+        //add dummy data
         if(daoSession.getThingsDao().loadAll().size() == 0){
-            daoSession.getThingsDao().insert(new Things(1L, "Test Name", "Test Supplier", "Test Quantity", "Test Date"));
+            daoSession.getThingsDao().insert(
+                new Things(1L, "Teh Kotak Tapi Botol", "Pabrik Minuman", "3", "10/12/2018"));
         }
     }
 
