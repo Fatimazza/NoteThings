@@ -90,13 +90,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         public HomeViewHolder(View itemView, final ItemListener itemListener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
             this.rootView = itemView;
-            tvThingName = rootView.findViewById(R.id.tv_thing_name);
-            tvThingQuantity = rootView.findViewById(R.id.tv_thing_quantity);
-            tvThingSupplier = rootView.findViewById(R.id.tv_thing_supplier);
-            tvThingDate = rootView.findViewById(R.id.tv_thing_date);
-
             this.itemListener = itemListener;
         }
 
