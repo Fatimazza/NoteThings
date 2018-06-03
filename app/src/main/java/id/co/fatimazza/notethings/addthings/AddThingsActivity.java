@@ -1,5 +1,6 @@
 package id.co.fatimazza.notethings.addthings;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NavUtils;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -28,6 +29,9 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
 
     @BindView(R.id.et_date)
     public EditText etDate;
+
+    @BindView(R.id.fab_remove)
+    public FloatingActionButton fabRemove;
 
     private AddThingsPresenter addThingsPresenter;
 
@@ -70,6 +74,10 @@ public class AddThingsActivity extends BaseActivity implements AddThingsContract
                 etNameOfThing.getText().toString(), spSupplier.getSelectedItem().toString(),
                 Long.valueOf(etQuantity.getText().toString()), etDate.getText().toString());
         }
+    }
+
+    public void deleteThing (View view) {
+
     }
 
     @Override
